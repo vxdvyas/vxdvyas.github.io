@@ -1,0 +1,284 @@
+body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Noto Serif JP', serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent body scroll if we want horizontal scroll on cards wrapper */
+}
+
+.back-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    border: 1px solid #fff;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.back-home:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.showcase-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding-top: 80px; /* Space for back button/title */
+}
+
+.page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+/* Container for the cards to allow horizontal scrolling/swiping */
+.cards-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for desktop, or use nowrap for pure horizontal scroll */
+    justify-content: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 1400px;
+}
+
+/* Card Styling */
+.project-card {
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid #333;
+    border-radius: 15px;
+    width: 350px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.1);
+    border-color: #555;
+}
+
+/* Slider inside the card */
+.card-image-slider {
+    position: relative;
+    width: 100%;
+    height: 200px; /* Adjust height as needed */
+    background-color: #000;
+    overflow: hidden;
+}
+
+.slides-container {
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+    /* Use flex to center text in placeholder, remove if using img tags */
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-family: sans-serif;
+    font-size: 1.2rem;
+}
+
+.slide.active {
+    display: flex; /* or block if using img */
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Slider Arrows */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s;
+}
+
+.slider-btn:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+/* Card Content */
+.card-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #fff;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+.project-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+.card-actions {
+    margin-top: auto;
+}
+
+/* GitHub Button */
+.github-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1a1a1a;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    border: 1px solid #fff;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.github-button:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.github-icon::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-size: cover;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .cards-wrapper {
+        flex-direction: row; 
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 20px; /* Space for scrollbar */
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch; /* for smooth scrolling on iOS */
+    }
+    
+    .project-card {
+        flex: 0 0 auto; /* Don't shrink, stick to width */
+        width: 85vw; /* width of card on mobile */
+        margin-right: 20px;
+    }
+    
+    .showcase-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+}
+
+/* Modal Styles */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.9); 
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 900px;
+    max-height: 90vh;
+    object-fit: contain;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 2001;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Animation for modal */
+.modal-content {  
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform:translateY(-50%) scale(0)} 
+    to {transform:translateY(-50%) scale(1)}
+}
+

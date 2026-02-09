@@ -1,0 +1,665 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+ body {
+  background-image: url("../assets/homepagebackground.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: black; 
+}
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.mecha-samurai-container {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    justify-content: center; 
+    
+    opacity: 0;
+    animation: samuraiEntrance 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes samuraiEntrance {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 100px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes sideButtonsEntrance {
+    from {
+        opacity: 0;
+        transform: translate(0, -30%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0, -50%);
+    }
+}
+
+.side-panel {
+    position: absolute; 
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px; 
+    z-index: 20; 
+    
+    opacity: 0;
+    animation: sideButtonsEntrance 1s ease-out forwards;
+    animation-delay: 2s;
+}
+
+.samurai-img {
+    display: block;
+    max-height: 80vh; 
+    width: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.samurai-glow {
+    position: absolute;
+    top: -15%; 
+    left: 50%;
+    transform: translateX(-26%);
+    width: 110%; 
+    z-index: 1; 
+    pointer-events: none;
+    opacity: 0.6;
+}
+#audioBtn {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    color: #fff;
+    z-index: 9999;
+    transition: all 0.3s ease;
+}
+
+#audioBtn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.1);
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    font-family: 'Cinzel', serif;
+}
+
+.navbar .brand {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.navbar .brand span {
+    color: #e53935;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin-right: 80px;
+}
+
+.navbar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 5px;
+    transition: color 0.3s;
+}
+
+.navbar ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #e53935;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.navbar ul li a:hover {
+    color: #e53935;
+}
+
+.navbar ul li a:hover::after {
+    width: 100%;
+}
+
+.left-panel {
+    left: 40px;
+}
+
+.right-panel {
+    right: 40px;
+}
+
+.side-btn-box {
+    width: 240px; 
+    height: 72px;
+    background-color: rgba(255, 255, 255, 0.1); 
+    border: 1px solid red;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.side-btn-box:hover {
+    background-color: transparent;
+    transform: scale(1.05);
+}
+
+.side-btn-img {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    display: block;
+}
+
+.nav-icon-link {
+    padding-bottom: 0 !important;
+    display: flex;
+    align-items: center;
+}
+
+.nav-icon-link::after {
+    display: none !important;
+}
+
+.nav-icon-btn {
+    height: 50px;
+    width: 180px;
+    object-fit: fill;
+    transition: transform 0.3s ease;
+    vertical-align: middle;
+}
+
+.nav-icon-btn:hover {
+    transform: scale(1.1);
+}
+
+.chatbot-icon {
+    position: fixed;
+    bottom: 24px;
+    right: 30px;
+    width: 60px;
+    height: auto;
+    z-index: 100;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.chatbot-icon:hover {
+    transform: scale(1.1);
+}
+
+footer {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(to top, #000000, rgba(0,0,0,0.8));
+    color: #fff;
+    padding: 2rem 2rem;
+    text-align: center;
+    z-index: 15;
+    font-family: 'Noto Serif JP', serif;
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+footer .footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+footer h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+    color: #e53935;
+}
+
+footer p {
+    font-size: 0.7rem;
+    opacity: 0.8;
+}
+
+footer .copyright {
+    margin-top: 0.5rem;
+    font-size: 0.7rem;
+    opacity: 0.6;
+}
+
+/* Chat Cloud / Samurai Message Styles */
+.chat-cloud-container {
+    position: absolute;
+    top: -20%;
+    left: 65%; 
+    transform: translateX(-120%); 
+    width: 480px;
+    height: auto;
+    z-index: 25;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.chat-cloud-container.show-message {
+    opacity: 1;
+    transform: translateX(-100%); 
+}
+
+.chat-cloud-bg {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.4));
+}
+
+.chat-cloud-text {
+    position: absolute;
+    top: 45%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    
+    font-family: 'Orbitron', sans-serif;
+    color: #000; /* Assuming light cloud background, adjust if dark */
+    text-align: center;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.9);
+        height: auto;
+    }
+
+    .navbar .brand {
+        margin-bottom: 10px;
+    }
+
+    .navbar ul {
+        margin-right: 0;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .nav-icon-btn {
+        width: auto !important;
+        height: 30px !important;
+    }
+
+    .hero-section {
+        height: auto;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 140px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .mecha-samurai-container {
+        position: relative;
+        order: 1;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        width: 100%;
+        margin-bottom: 20px;
+        animation: samuraiEntranceMobile 1s ease-out forwards;
+    }
+
+    @keyframes samuraiEntranceMobile {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .samurai-img {
+        max-height: 40vh;
+        margin: 0 auto;
+    }
+
+    .samurai-glow {
+        top: -10%;
+        width: 100%;
+        transform: translateX(-50%);
+    }
+
+    .side-panel {
+        position: relative;
+        top: auto;
+        transform: none !important;
+        order: 2;
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        left: auto !important;
+        right: auto !important;
+        margin-bottom: 10px;
+        animation: none;
+        opacity: 1;
+        gap: 10px;
+    }
+
+    .left-panel, .right-panel {
+        display: flex;
+        justify-content: center;
+    }
+
+    .side-btn-box {
+        width: 45%;
+        height: 50px;
+        background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .start-game-btn {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin: 30px auto;
+        display: block;
+        width: 80%;
+        text-align: center;
+        order: 3;
+    }
+
+    .chatbot-icon {
+        bottom: 15px;
+        right: 15px;
+        width: 50px;
+    }
+
+    #audioBtn {
+        top: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+    }
+
+    .chat-cloud-container {
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        transform: translateX(-50%) !important;
+        width: 60%;
+    }
+
+    .chat-cloud-container.show-message {
+        transform: translateX(-50%) !important;
+    }
+
+    .chat-cloud-text {
+        font-size: 0.6rem;
+    }
+
+    footer {
+        position: relative;
+        order: 4;
+        width: 100%;
+    }
+
+    .chatbot-container {
+        width: 95%;
+        height: 70vh;
+        padding: 60px 20px 20px 20px;
+    }
+
+    .close-chatbot {
+        top: 20px;
+        right: 20px;
+    }
+}
+
+
+/* Chatbot Modal Styles - Revised for WhatsApp Style in Frame */
+.chatbot-modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0,0,0,0.5); 
+    justify-content: center;
+    align-items: center;
+}
+
+.chatbot-container {
+    background-image: url('../assets/chatbotui.png'); /* Note relative path */
+    background-size: 100% 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    
+    width: 400px; 
+    height: 600px; 
+    
+    position: relative;
+    border-radius: 15px; 
+    display: flex;
+    flex-direction: column;
+    
+    padding: 100px 75px 70px 75px; 
+}
+
+.close-chatbot {
+    position: absolute;
+    top: 45px;      
+    right: 35px;    
+    color: #fff;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1005;
+    background: rgba(0,0,0,0.4); 
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    line-height: 30px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.close-chatbot:hover {
+    color: #e53935;
+    background: rgba(255,255,255,0.9);
+}
+
+.chatbot-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-right: 5px; 
+    
+    scrollbar-width: thin;
+    scrollbar-color: #e53935 rgba(0,0,0,0.3);
+}
+
+.chatbot-body::-webkit-scrollbar {
+    width: 6px;
+}
+.chatbot-body::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1); 
+}
+.chatbot-body::-webkit-scrollbar-thumb {
+    background: #e53935; 
+    border-radius: 10px;
+}
+
+/* Chat Bubbles */
+.chat-bubble {
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-family: 'Noto Serif JP', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    max-width: 85%;
+    position: relative;
+    word-wrap: break-word;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.user-bubble {
+    align-self: flex-end;
+    background: #e53935;
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+
+.bot-bubble {
+    align-self: flex-start;
+    background: rgba(20, 20, 20, 0.9); 
+    border: 1px solid #444;
+    color: #eee;
+    border-bottom-left-radius: 4px;
+}
+
+/* Option Chips (Questions) */
+.chat-options {
+    display: flex;
+    flex-direction: column; 
+    gap: 8px;
+    margin-top: 10px;
+    align-items: flex-end; 
+}
+
+.option-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #e53935;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-align: right;
+    transition: all 0.2s ease;
+    font-family: 'Cinzel', serif;
+    backdrop-filter: blur(2px);
+    max-width: 100%;
+}
+
+.option-btn:hover {
+    background: #e53935;
+    color: #fff;
+    transform: translateX(-5px);
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Start Game Button */
+.start-game-btn {
+    position: fixed;
+    bottom: 40px; /* Moved upward */
+    left: 40px;   /* Moved right */
+    background-color: #e53935; 
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    padding: 20px 35px; /* Increased padding size */
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2rem; /* Increased font size */
+    border: 2px solid #e53935;
+    z-index: 999;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(229, 57, 53, 0.6);
+    /* Techno/Samurai angled look */
+    clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+}
+
+.start-game-btn:hover {
+    background-color: #FFD700; /* Yellow */
+    color: black;
+    border-color: #FFD700;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+    transform: scale(1.05);
+}
+

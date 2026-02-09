@@ -1,0 +1,181 @@
+/* 
+    Skills Page Stylesheet
+    Layout for skill cards grouped by categories.
+*/
+
+/* Reset and Body */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Orbitron', sans-serif;
+    background-image: url("../assets/skillsbg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #000;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Main Container */
+.main-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding-bottom: 100px; /* Space for back button */
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    z-index: 10;
+}
+
+/* Category Sections */
+.category-section {
+    width: 100%;
+}
+
+.category-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #ADFF2F; /* Green Yellow to match theme */
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(173, 255, 47, 0.3);
+    border-bottom: 2px solid #ADFF2F;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* Cards Grid */
+.cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+.cards-grid.centered-grid {
+    justify-content: center; /* Center single items like frameworks */
+}
+
+/* Skill Card */
+.skill-card {
+    background-color: rgba(60, 30, 10, 0.85); /* Dark Brown with opacity */
+    border: 1px solid #8B4513; /* SaddleBrown border */
+    border-radius: 12px;
+    width: 200px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(139, 69, 19, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Floating Animation */
+    animation: float-card 6s ease-in-out infinite;
+}
+
+.skill-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(173, 255, 47, 0.6); /* Green Yellow glow on hover */
+    border-color: #ADFF2F;
+}
+
+/* Stagger animations randomly for organic feel */
+.skill-card:nth-child(2n) { animation-delay: 1s; }
+.skill-card:nth-child(3n) { animation-delay: 2s; }
+.skill-card:nth-child(4n) { animation-delay: 0.5s; }
+.skill-card:nth-child(5n) { animation-delay: 1.5s; }
+
+.skill-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+}
+
+.skill-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 1px;
+}
+/* 
+    Special styling for Text-Only Cards (Soft Skills)
+    Increases font size since there is no image.
+*/
+.skill-card.text-only .skill-name {
+    font-size: 1.3rem;
+    line-height: 1.5;
+}
+/* Floating Keyframes */
+@keyframes float-card {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Back Button (Sci-Fi Polygon) */
+.back-btn {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    background-color: #ADFF2F; /* Green Yellow */
+    color: #000;
+    font-family: 'Orbitron', sans-serif;
+    padding: 20px 45px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border: none;
+    z-index: 100;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(173, 255, 47, 0.5);
+    
+    /* Chamfered edges */
+    clip-path: polygon(
+        20px 0, 
+        100% 0, 
+        100% calc(100% - 20px), 
+        calc(100% - 20px) 100%, 
+        0 100%, 
+        0 20px
+    );
+}
+
+.back-btn:hover {
+    background-color: #000;
+    color: #ADFF2F;
+    box-shadow: 0 0 25px rgba(173, 255, 47, 0.8);
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cards-grid {
+        justify-content: center;
+    }
+    
+    .back-btn {
+        bottom: 20px;
+        left: 20px;
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+
+    .category-title {
+        text-align: center;
+        display: block;
+    }
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Showcase | Ved Vyas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+JP:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="projectshowcase.css">
+    <!-- Reusing loader styles if needed, or keeping it simple -->
+</head>
+<body>
+    
+    <!-- Navigation back to home (optional but good UX) -->
+    <a href="homepage.html" class="back-home">Back to Home</a>
+
+    <div class="showcase-container">
+        <h1 class="page-title">Project Showcase</h1>
+        
+        <div class="cards-wrapper">
+            <!-- Card 1 -->
+            <div class="project-card">
+                <div class="card-image-slider" id="slider-1">
+                    <button class="slider-btn prev" onclick="moveSlide('slider-1', -1)">&#10094;</button>
+                    <div class="slides-container">
+                        <div class="slide active"><img src="../assets/gamecafe1.png" alt="Game Cafe Management System Preview 1" onclick="openModal(this.src)" style="cursor: pointer;"></div>
+                        <div class="slide"><img src="../assets/gamecafe2.png" alt="Game Cafe Management System Preview 2" onclick="openModal(this.src)" style="cursor: pointer;"></div>
+                        <div class="slide"><img src="../assets/gamecafe3.png" alt="Game Cafe Management System Preview 3" onclick="openModal(this.src)" style="cursor: pointer;"></div>
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide('slider-1', 1)">&#10095;</button>
+                </div>
+                
+                <div class="card-content">
+                    <h2 class="project-name">Game Cafe Management System</h2>
+                    <p class="project-description">
+                       A Game Café Management System built on Frappe streamlines daily operations by managing game 
+                       stations consoles and PCs customer sessions and time-based billing from a single dashboard. 
+                       It also handles user registration bookings inventory of games and snacks and automated invoices 
+                       with real-time usage tracking. Using Frappe’s role-based access and reports the café owner can
+                        monitor revenue peak hours and system performance efficiently.
+                    </p>
+                    <div class="card-actions">
+                        <a href="" target="_blank" class="github-button">
+                            <span class="github-icon"></span> Coming Soon...
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="project-card">
+                <div class="card-image-slider" id="slider-2">
+                    <button class="slider-btn prev" onclick="moveSlide('slider-2', -1)">&#10094;</button>
+                    <div class="slides-container">
+                        <!-- <div class="slide active" style="background-color: #333;">Image 1</div>
+                        <div class="slide" style="background-color: #444;">Image 2</div>
+                        <div class="slide" style="background-color: #555;">Image 3</div> -->
+                        <div class="slide active"><img src="../assets/sih1.png" alt="AI Health Assistant Preview 1" onclick="openModal(this.src)" style="cursor: pointer;"></div>
+                        <div class="slide"><img src="../assets/sih2.png" alt="AI Health Assistant Preview 2" onclick="openModal(this.src)" style="cursor: pointer;"></div>
+                        <div class="slide"><img src="../assets/sih3.png" alt="AI Health Assistant Preview 3" onclick="openModal(this.src)" style="cursor: pointer;"></div>
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide('slider-2', 1)">&#10095;</button>
+                </div>
+                
+                <div class="card-content">
+                    <h2 class="project-name">AI Health Assistant Chatbot</h2>
+                    <p class="project-description">
+                        An AI Health Assistant Chatbot prototype developed as part of SIH focuses on providing basic 
+                        health guidance symptom awareness and preventive care information through conversational interaction.
+                         The chatbot uses AI/NLP to understand user inputs and offers rule-based or model-driven responses 
+                         while clearly avoiding medical diagnosis. It aims to improve healthcare accessibility awareness 
+                         and first-level guidance especially in underserved areas. Twilio + FastAPI with Translate API 
+                         enables a multilingual communication system where user messages or calls are received via 
+                         Twilio and processed by a FastAPI backend. Incoming text or speech is translated using 
+                         Google Translate API  into the required language before generating a response. 
+                         The translated reply is then sent back to the user in their preferred language enabling real-time 
+                         cross-language interaction.
+                    <div class="card-actions">
+                        <a href="" target="_blank" class="github-button">
+                            <span class="github-icon"></span> Coming Soon...
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Card 3 -->
+             <div class="project-card">
+                <div class="card-image-slider" id="slider-3">
+                    <button class="slider-btn prev" onclick="moveSlide('slider-3', -1)">&#10094;</button>
+                    <div class="slides-container">
+                        <div class="slide active"><img src="../assets/matrix1.png" alt="Matrix Calculator Preview 1" onclick="openModal(this.src)" style="cursor: pointer;"></div>
+                        <div class="slide"><img src="../assets/matrix2.png" alt="Matrix Calculator Preview 2" onclick="openModal(this.src)" style="cursor: pointer;"></div>
+                        <div class="slide"><img src="../assets/matrix3.png" alt="Matrix Calculator Preview 3" onclick="openModal(this.src)" style="cursor: pointer;"></div>
+                    </div>
+                    <button class="slider-btn next" onclick="moveSlide('slider-3', 1)">&#10095;</button>
+                </div>
+                
+                <div class="card-content">
+                    <h2 class="project-name">Matrix Calculator</h2>
+                    <p class="project-description">
+                       A Matrix Calculator in C is a console-based project that performs all major matrix operations including addition, subtraction, multiplication,
+                        transpose, adjoint, determinant, and inverse of matrices.
+                       The project strengthens understanding of arrays, nested loops, functions, and mathematical logic implementation in the C programming language.
+
+                    </p>
+                    <div class="card-actions">
+                        <a href="https://github.com/developerved2312/matrix_calculator" target="_blank" class="github-button">
+                            <span class="github-icon"></span> View on GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <script src="projectshowcase.js"></script>
+</body>
+</html>

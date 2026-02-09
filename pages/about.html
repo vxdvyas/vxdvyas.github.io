@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 
+    About Page
+    Displays personal bio and social links.
+-->
+<head>
+    <!-- 
+        Setting up the document character set and viewport for responsiveness
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Ved Vyas</title>
+    
+    <!-- 
+        Importing fonts: Cinzel, Noto Serif JP, and Orbitron 
+        These fonts match the style used in the homepage
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+JP:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Linking the specific stylesheet for the About page -->
+    <link rel="stylesheet" href="about.css">
+    <!-- General styles for the loader -->
+    <link rel="stylesheet" href="../loader.css">
+</head>
+<body>
+   <!-- General Loader structure -->
+   <div id="techno-loader">
+       <div class="loader-content">
+           <div class="circle"></div>
+           <div class="circle"></div>
+           <div class="circle"></div>
+           <div class="loading-text">LOADING</div>
+       </div>
+   </div>
+
+    <!-- 
+        Back Button
+        Designed similarly to the Start button on the homepage.
+    -->
+    <a href="homepage.html" class="back-btn">BACK</a>
+
+    <!-- 
+        Main Container for the About Card
+        The card itself is the red gamified element requested.
+    -->
+    <div class="card-container">
+        <div class="about-card">
+            
+            <!-- Left Side: Content (Name, Description, Links) -->
+            <div class="content-left">
+                <!-- Name appearing on top -->
+                <h1 class="name-title">Ved Vyas</h1>
+                
+                <!-- Small Description -->
+                <p class="description">
+                    Passionate STEM enthusiast with a strong interest in Artificial Intelligence,
+                    Machine Learning, and Data Science. A sincere and dedicated learner,
+                    consistently seeking opportunities to expand knowledge and skills. I enjoy
+                    tech exploration and follow the Kaizen philosophy of continuous
+                    improvement, striving to grow every day. Committed to continuous
+                    growth and innovation in the technology domain.
+                </p>
+                
+                <!-- Social Links: GitHub and HackerRank -->
+                <div class="social-links">
+                     <a href="https://github.com/developerved2312" target="_blank" class="social-btn">GitHub</a>
+                     <a href="https://www.hackerrank.com/profile/ved_codes2312" target="_blank" class="social-btn">HackerRank</a>
+                </div>
+            </div>
+
+            <!-- Right Side: User Image -->
+            <div class="content-right">
+                <img src="../assets/vedvyas_profilepic.jpg" alt="Ved Vyas" class="profile-img">
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- General script for loader functionality -->
+    <script src="../loader.js"></script>
+</body>
+</html>

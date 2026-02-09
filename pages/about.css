@@ -1,0 +1,260 @@
+/* 
+    About Page Stylesheet
+    Personal information and bio styling.
+*/
+
+/* 
+    General Reset and Body Styling 
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+/* 
+    Background Setup 
+    Using aboutpagebg.png as full background
+*/
+body {
+    background-image: url("../assets/aboutpagebg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: black; /* Fallback */
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevent scrolling if not needed */
+}
+
+/* 
+    Back Button Styles
+    Replicated from homepage.html's Start Game button 
+    Standardized Sci-Fi Polygon
+*/
+.back-btn {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    background-color: #e53935; 
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    padding: 20px 45px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border: none;
+    z-index: 999;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(229, 57, 53, 0.6);
+    
+    /* Chamfered edges */
+    clip-path: polygon(
+        20px 0, 
+        100% 0, 
+        100% calc(100% - 20px), 
+        calc(100% - 20px) 100%, 
+        0 100%, 
+        0 20px
+    );
+}
+
+.back-btn:hover {
+    background-color: #FFD700; /* Yellow hover effect */
+    color: black;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+    transform: scale(1.05); /* Slight grow on hover */
+}
+
+/* 
+    Card Container
+    Centers the card on the screen
+*/
+.card-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* 
+    The Huge Hovering Card
+    Gamified red color background
+*/
+.about-card {
+    background: rgba(229, 57, 53, 0.9); /* Red base with slight transparency */
+    width: 900px;
+    max-width: 90%;
+    min-height: 500px;
+    display: flex;
+    flex-direction: row; /* Side-by-side layout: Text Left, Image Right */
+    justify-content: space-between;
+    align-items: center;
+    padding: 3rem;
+    color: white;
+    
+    /* Angled corners for gamified aesthetic */
+    clip-path: polygon(
+        5% 0, 100% 0, 100% 90%, 95% 100%, 0 100%, 0 10%
+    );
+    
+    /* Glow/Shadow for depth */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    
+    /* Transition for hover effect */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* 
+    Hover Effect on the Card
+    Makes it "hover" nicely
+*/
+.about-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(229, 57, 53, 0.6);
+}
+
+/* 
+    Left Content Area (Text) 
+*/
+.content-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 2rem;
+}
+
+/* Name Styling */
+.name-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    color: #fff;
+    text-shadow: 3px 3px 0 #000;
+    letter-spacing: 2px;
+}
+
+/* Description Text Styling */
+.description {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    background: rgba(0, 0, 0, 0.3); /* Darken background for readability */
+    padding: 15px;
+    border-left: 4px solid #FFD700; /* Gold accent line */
+    border-radius: 0 10px 10px 0;
+}
+
+/* 
+    Social Links Container 
+*/
+.social-links {
+    display: flex;
+    gap: 20px;
+}
+
+/* Social Buttons */
+.social-btn {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    padding: 10px 25px;
+    border: 2px solid white;
+    border-radius: 5px; /* Slight rounding or keep square for tech feel */
+    transition: all 0.3s ease;
+    font-weight: bold;
+    background: black;
+}
+
+.social-btn:hover {
+    background: #FFD700;
+    color: black;
+    border-color: #FFD700;
+    box-shadow: 0 0 15px #FFD700;
+}
+
+/* 
+    Right Content Area (Image) 
+*/
+.content-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Profile Image Styling */
+.profile-img {
+    width: 350px;       /* Fixed size or strictly controlled */
+    height: 350px;
+    object-fit: cover;
+    border-radius: 50%; /* Circle image or modify for square */
+    border: 5px solid white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    
+    /* Floating effect for image */
+    animation: floatImg 6s ease-in-out infinite;
+}
+
+/* 
+    Animation for floating image 
+*/
+@keyframes floatImg {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+}
+
+/* 
+    Responsiveness 
+    Adjust layout for smaller screens
+*/
+@media (max-width: 900px) {
+    .about-card {
+        flex-direction: column-reverse;
+        height: auto;
+        padding: 2rem;
+        clip-path: none; /* Simplify shape on mobile */
+        border-radius: 20px;
+    }
+
+    .content-left {
+        padding-right: 0;
+        text-align: center;
+        margin-top: 2rem;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+
+    .descripption {
+        text-align: left;
+    }
+    
+    .profile-img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .back-btn {
+        bottom: 20px;
+        left: 20px;
+        padding: 15px 25px;
+        font-size: 1rem;
+    }
+}

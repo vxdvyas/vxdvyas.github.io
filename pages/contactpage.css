@@ -1,0 +1,127 @@
+body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Noto Serif JP', serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.back-home {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    border: 1px solid #fff;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.back-home:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000 70%);
+}
+
+.page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    margin-bottom: 50px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    margin-top: 60px; /* Space for back button */
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.icon-wrapper {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #ccc;
+    transition: color 0.3s;
+}
+
+.contact-card:hover .icon-wrapper {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.contact-card h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.contact-card p {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin: 0;
+}
+
+.special-card {
+    border-color: rgba(255, 215, 0, 0.3); /* Gold tint for photography */
+}
+
+.special-card:hover {
+    box-shadow: 0 10px 20px rgba(255, 215, 0, 0.1);
+}
+
+/* Specific hover colors matching brands approx */
+.contact-card:hover .fa-reddit-alien { color: #FF4500; }
+.contact-card:hover .fa-x-twitter { color: #fff; } /* X is black/white */
+.contact-card:hover .fa-medium { color: #fff; }
+.contact-card:hover .fa-instagram { color: #E1306C; }
+.contact-card:hover .fa-quora { color: #B92B27; }
+.contact-card:hover .fa-pinterest { color: #BD081C; }
+.contact-card:hover .fa-envelope { color: #0078D4; }
+.contact-card:hover .fa-camera-retro { color: #FFD700; }
+
+@media (max-width: 600px) {
+    .page-title {
+        font-size: 2rem;
+    }
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}

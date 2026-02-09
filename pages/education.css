@@ -1,0 +1,202 @@
+/* 
+    Education Page Stylesheet
+    Timeline or card view of educational background.
+*/
+
+/* Reset and Body */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Orbitron', sans-serif;
+    background-image: url("../assets/educationpagebg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+/* Cards Container */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding: 20px;
+    width: 90%;
+    flex-wrap: wrap; /* Responsive wrap */
+    z-index: 10;
+}
+
+/* Card Styling */
+.education-card {
+    background-color: rgba(135, 206, 250, 0.85); /* Light Sky Blue with opacity */
+    border: 2px solid #fff;
+    border-radius: 15px;
+    width: 320px; /* Slightly wider to accommodate text */
+    height: 600px; /* Fixed height for uniformity */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+    color: #001f3f; /* Dark text for contrast */
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    
+    /* Floating Animation default */
+    animation: float-card 6s ease-in-out infinite;
+}
+
+/* Stagger animations so they don't move in sync */
+#card1 { animation-delay: 0s; }
+#card2 { animation-delay: 1s; }
+#card3 { animation-delay: 2s; }
+
+/* Content Styling inside Card */
+.institution {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem; /* Slightly smaller to fit long names */
+    font-weight: 700;
+    margin-bottom: 5px;
+    border-bottom: 2px solid #001f3f;
+    padding-bottom: 5px;
+    height: 120px; /* Fixed height for title area */
+    width: 100%;
+    display: flex;
+    align-items: center; /* Vertically center */
+    justify-content: center;
+}
+
+.year {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: #003366;
+    height: 30px; /* Fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-image-container {
+    width: 100%;
+    height: 150px; /* Fixed height */
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid #003366;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.card-img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.description {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    height: 150px; /* Increased height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: block; /* Changed from flex to block for proper scrolling behavior */
+    text-align: center;
+    padding: 0 5px; /* Add padding for text not touching scrollbar */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgba(0, 31, 63, 0.5) rgba(255, 255, 255, 0.1); /* Firefox */
+}
+
+/* Custom Scrollbar */
+.description::-webkit-scrollbar {
+    width: 5px;
+}
+
+.description::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1); 
+    border-radius: 10px;
+}
+
+.description::-webkit-scrollbar-thumb {
+    background: rgba(0, 31, 63, 0.6); 
+    border-radius: 10px;
+}
+
+.description::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 31, 63, 0.9); 
+}
+
+.grades {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: auto; /* Push to bottom if space allows */
+}
+
+/* Floating Keyframes */
+@keyframes float-card {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* 
+    Back Button Styles
+    Dark blue normally, Blue to Black content/hover
+    Sci-Fi Polygon Format
+*/
+.back-btn {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    background-color: #00008b; /* Dark Blue */
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    padding: 20px 45px; 
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border: none;
+    z-index: 999;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 139, 0.5);
+    
+    /* Chamfered edges */
+    clip-path: polygon(
+        20px 0, 
+        100% 0, 
+        100% calc(100% - 20px), 
+        calc(100% - 20px) 100%, 
+        0 100%, 
+        0 20px
+    );
+}
+
+.back-btn:hover {
+    background-color: #000; /* Black */
+    color: #0ff; /* Neon cyan text on hover */
+    box-shadow: 0 0 20px #0ff;
+    transform: scale(1.05); /* Slight grow */
+}

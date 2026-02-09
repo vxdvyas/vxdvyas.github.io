@@ -1,0 +1,437 @@
+* {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: transparent;
+}
+
+#introVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+  transform: scale(1.1); /* Zoom in to crop edges/watermarks */
+}
+
+#introOverlay {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+#contentContainer {
+    position: relative;
+    width: 900px;
+    max-width: 90%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* to ensure  content is centered */
+}
+
+#katana {
+    position: absolute;
+    left: -9%; /* Shift componeny */
+    height: 140%; /* size */
+    top: -20%; /* vertical alignment */
+    z-index: 20;
+    opacity: 0;
+    filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.5));
+}
+
+#paperWrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    z-index: 10;
+}
+
+#paper {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
+}
+
+#textOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+    padding: 15% 8% 0 8%; /* top padding controls vertical position */
+    transform: translateY(-8%);
+}
+
+#nameImage {
+    width: 60%; 
+    max-width: 500px;
+    height: auto;
+    margin-bottom: 12px !important; /* spacing */
+    opacity: 0;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4));
+}
+
+#japaneseGreeting {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2.2rem; 
+    color: #e53935; 
+    margin-bottom: 12px !important; /* spacing */
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+#japaneseGreeting .char {
+    display: inline-block;
+    opacity: 0; 
+}
+
+#greetingText {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem; 
+    font-weight: 700;
+    margin-bottom: 15px !important; /* spacing */
+    letter-spacing: 1px;
+    opacity: 0;
+    color: #000;
+    text-transform: uppercase;
+}
+
+#buttonWrapper {
+    opacity: 0;
+    pointer-events: auto;
+}
+
+#continueBtn {
+    width: 180px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+#continueBtn:hover {
+    transform: scale(1.05);
+}
+/* audio button */
+#audioBtn {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+    cursor: pointer;
+
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+
+    color: #fff;
+    z-index: 9999;
+
+    transition: all 0.3s ease;
+}
+
+#audioBtn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.1);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    #contentContainer {
+        width: 80%;
+    }
+    #katana {
+        left: -15%;
+    }
+}
+
+@media (max-width: 768px) {
+    #contentContainer {
+        width: 95%;
+    }
+    #katana {
+        left: -15%;
+        height: 125%;
+    }
+    #textOverlay {
+        /* mobile padding adjustments */
+        padding: 23% 40px 0 40px; 
+    }
+    #nameImage {
+        width: 75%;
+        margin-bottom: 10px !important;
+    }
+    #japaneseGreeting { 
+        font-size: 1.5rem; 
+        margin-bottom: 10px !important;
+    }
+    #greetingText { 
+        font-size: 0.85rem; 
+        margin-bottom: 15px !important;
+    }
+    #continueBtn { width: 130px; }
+}
+
+
+
+
+footer {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(to top, #000000, rgba(0,0,0,0.8));
+    color: #fff;
+    padding: 3rem 2rem;
+    text-align: center;
+    z-index: 20;
+    font-family: 'Noto Serif JP', serif;
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+footer .footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+footer h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #e53935;
+}
+
+footer p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+footer .social-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+footer .social-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    padding: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer .social-links a:hover {
+    background: #e53935;
+    border-color: #e53935;
+    transform: translateY(-5px);
+}
+
+footer .copyright {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* Chatbot Icon */
+.chatbot-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px; /* Adjust size as needed */
+    height: auto;
+    z-index: 999;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    pointer-events: auto;
+}
+
+
+/* Chatbot Modal Styles - Revised for WhatsApp Style in Frame */
+.chatbot-modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0,0,0,0.5); 
+    justify-content: center;
+    align-items: center;
+}
+
+.chatbot-container {
+    background-image: url('assets/chatbotui.png');
+    background-size: 100% 100%; /* Force image to fill the container */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    
+    /* Dimensions - Increased size */
+    width: 400px; 
+    height: 600px; 
+    
+    position: relative;
+    border-radius: 15px; 
+    display: flex;
+    flex-direction: column;
+    
+    /* Padding to keep text inside the 'screen' area of the frame */
+    /* Adjust these if the text overlaps the frame border */
+    padding: 100px 75px 70px 75px !important; 
+}
+
+.close-chatbot {
+    position: absolute;
+    top: 45px;      /* Positioned relative to container top */
+    right: 35px;    /* Positioned relative to container right */
+    color: #fff;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1005;
+    background: rgba(0,0,0,0.4); /* background for visibility */
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    line-height: 30px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.close-chatbot:hover {
+    color: #e53935;
+    background: rgba(255,255,255,0.9);
+}
+
+.chatbot-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-right: 5px; /* Space for scrollbar */
+    
+    /* Scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: #e53935 rgba(0,0,0,0.3);
+}
+
+.chatbot-body::-webkit-scrollbar {
+    width: 6px;
+}
+.chatbot-body::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1); 
+}
+.chatbot-body::-webkit-scrollbar-thumb {
+    background: #e53935; 
+    border-radius: 10px;
+}
+
+/* Chat Bubbles */
+.chat-bubble {
+    padding: 10px 14px !important;
+    border-radius: 18px;
+    font-family: 'Noto Serif JP', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    max-width: 85%;
+    position: relative;
+    word-wrap: break-word;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.user-bubble {
+    align-self: flex-end;
+    background: #e53935;
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+
+.bot-bubble {
+    align-self: flex-start;
+    background: rgba(20, 20, 20, 0.9); /* Dark bubble */
+    border: 1px solid #444;
+    color: #eee;
+    border-bottom-left-radius: 4px;
+}
+
+/* Option Chips (Questions) */
+.chat-options {
+    display: flex;
+    flex-direction: column; /* Stack vertically if horizontal takes too much space, or wrap */
+    gap: 8px;
+    margin-top: 10px;
+    align-items: flex-end; /* Align to right like suggested actions */
+}
+
+.option-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #e53935;
+    color: #fff;
+    padding: 8px 14px !important;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-align: right;
+    transition: all 0.2s ease;
+    font-family: 'Cinzel', serif;
+    backdrop-filter: blur(2px);
+    max-width: 100%;
+}
+
+.option-btn:hover {
+    background: #e53935;
+    color: #fff;
+    transform: translateX(-5px);
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+

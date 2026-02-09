@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Serif+JP:wght@400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage.css">
+    <!-- General styles for the loader -->
+    <link rel="stylesheet" href="../loader.css">
+    <title>Ved Vyas | Portfolio </title>
+</head>
+<body>   
+   <!-- General Loader structure -->
+   <div id="techno-loader">
+       <div class="loader-content">
+           <div class="circle"></div>
+           <div class="circle"></div>
+           <div class="circle"></div>
+           <div class="loading-text">LOADING</div>
+       </div>
+   </div>
+
+    <nav class="navbar">
+        <a href="#" class="brand">Ved <span>Vyas</span></a>
+        <ul>
+            <li><a href="projectshowcase.html" class="nav-icon-link"><img src="../assets/projectsbtn.png" alt="Projects" class="nav-icon-btn" style="width:200px; height:65px;"></a></li>
+            <li><a href="contactpage.html" class="nav-icon-link"><img src="../assets/contactbtn.png" alt="Contact" class="nav-icon-btn"></a></li>
+            <li><a href="https://drive.google.com/file/d/1rEjgHUJTr1uxmlM7WA03zdnVuZniM9L6/view?usp=drive_link" class="nav-icon-link"><img src="../assets/downloadcvbtn.png" alt="Download CV" class="nav-icon-btn"></a></li>
+            <li><a href="https://github.com/developerved2312" class="nav-icon-link"><img src="../assets/github.png" alt="GitHub" class="nav-icon-btn"></a></li>
+        </ul>
+    </nav>
+
+    <div class="hero-section">
+        <!-- Vertical Buttons Left -->
+        <div class="side-panel left-panel">
+            <a href="about.html" class="side-btn-box"><img src="../assets/aboutbtn.png" alt="About Button" class="side-btn-img"></a>
+            <a href="education.html" class="side-btn-box"><img src="../assets/educationbtn.png" alt="Education Button" class="side-btn-img"></a>
+            <a href="experience.html" class="side-btn-box"><img src="../assets/experiencebtn.png" alt="Experience Button" class="side-btn-img"></a>
+        </div>
+
+        <!-- Vertical Buttons Right -->
+        <div class="side-panel right-panel">
+            <a href="certificate.html" class="side-btn-box"><img src="../assets/certificationsbtn.png" alt="Certification Button" class="side-btn-img"></a>
+            <a href="skills.html" class="side-btn-box"><img src="../assets/skillbtn.png" alt="Skill Button" class="side-btn-img"></a>
+            <a href="https://medium.com/@vedcodes" class="side-btn-box"><img src="../assets/blogbtn.png" alt="Blog Button" class="side-btn-img"></a>
+        </div>
+
+        <div class="mecha-samurai-container">
+            <img src="../assets/samuraiglow.png" alt="Glow" class="samurai-glow">
+            <img src="../assets/mechasamurai.png" alt="Mecha Samurai" class="samurai-img">
+            <div id="chatCloudContainer" class="chat-cloud-container">
+                <img src="../assets/chatcloud1.png" alt="Cht" class="chat-cloud-bg">
+                <div id="chatCloudText" class="chat-cloud-text"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="hero-section">
+    
+        <div class="side-panel left-panel">
+            <div class="v-btn-placeholder">L1</div>
+            <div class="v-btn-placeholder">L2</div>
+            <div class="v-btn-placeholder">L3</div>
+        </div>
+
+        <div class="side-panel right-panel">
+            <div class="v-btn-placeholder">R1</div>
+            <div class="v-btn-placeholder">R2</div>
+            <div class="v-btn-placeholder">R3</div>
+    </div> -->
+
+
+    <audio id="bgMusic" loop>
+        <source src="../assets/traditional-japanese-1-437929.mp3" type="audio/mpeg">
+    </audio>
+    <div id="audioBtn" title="Toggle Sound">🔇</div>
+
+    <img src="../assets/chatboticon.png" alt="Chatbot" class="chatbot-icon" id="chatbotIcon">
+
+    <!-- Chatbot Modal -->
+    <div id="chatbotModal" class="chatbot-modal">
+        <div class="chatbot-container">
+            <span class="close-chatbot">&times;</span>
+            <div id="chatbot-body" class="chatbot-body">
+                <!-- Chat History -->
+            </div>
+        </div>
+    </div>
+
+    <a href="minigame.html" class="start-game-btn">START GAME</a>
+
+    <!-- footer part -->
+    <footer>
+        <center>
+            <div class="footer-content">
+                <h3>Ved Vyas</h3>
+                <p style="font-size: 0.8rem; opacity: 0.7; max-width: 600px;">
+                    Background music from Pixabay Music.
+                </p>
+                <div class="copyright">
+                    &copy; 2026 Ved Vyas. All Rights Reserved.
+                </div>
+            </div>
+        </center>
+    </footer>
+
+    <script src="homepage.js"></script>
+    <!-- General script for loader functionality -->
+    <script src="../loader.js"></script>
+<!-- <img src="../assets/homepagebackground.png" alt="Background" class="bg-image"/>    -->
+</body>
+</html>

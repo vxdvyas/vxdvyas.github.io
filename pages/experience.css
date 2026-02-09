@@ -1,0 +1,227 @@
+/* 
+    Experience Page Stylesheet
+    Timeline of professional work experience.
+*/
+
+/* Reset and Body */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Orbitron', sans-serif;
+    background-image: url("../assets/experiencebg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #000;
+    color: #fff;
+    overflow: hidden; /* Prevent body scroll to emphasize "inbuilt scrolling" container */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Page Title (Outside Container) */
+.page-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.page-title {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    color: #E0B0FF; /* Mauve/Light Purple */
+    text-shadow: 0 0 15px rgba(224, 176, 255, 0.6);
+    letter-spacing: 2px;
+    background: rgba(0, 0, 0, 0.6); /* Dark background strip */
+    padding: 10px 40px;
+    border-radius: 10px;
+    display: inline-block;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(224, 176, 255, 0.3);
+}
+
+/* Scrollable Container */
+.experience-container {
+    width: 90%;
+    max-width: 900px;
+    height: 65vh; /* Fixed height for scrolling */
+    background: rgba(30, 10, 40, 0.4); /* Very transparent dark purple */
+    border: 2px solid #9932CC; /* DarkOrchid */
+    border-radius: 20px;
+    padding: 30px;
+    overflow-y: auto;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 30px rgba(153, 50, 204, 0.4);
+    position: relative;
+}
+
+/* Custom Scrollbar */
+.experience-container::-webkit-scrollbar {
+    width: 12px;
+}
+
+.experience-container::-webkit-scrollbar-track {
+    background: rgba(10, 0, 20, 0.6);
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.experience-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #BA55D3, #8A2BE2);
+    border-radius: 10px;
+    border: 2px solid rgba(10, 0, 20, 0.6);
+}
+
+.experience-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #DA70D6, #9370DB);
+}
+
+/* Experience Cards */
+.experience-card {
+    background: rgba(72, 61, 139, 0.65); /* DarkSlateBlue with opacity */
+    border: 1px solid #7B68EE; /* MediumSlateBlue */
+    border-left: 5px solid #DA70D6; /* Orchid accent on left */
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 30px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.experience-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(138, 43, 226, 0.4);
+    background: rgba(72, 61, 139, 0.85);
+    border-color: #BA55D3;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.header-left {
+    flex: 1;
+}
+
+.position {
+    font-size: 1.6rem;
+    color: #E6E6FA; /* Lavender */
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.institution {
+    font-size: 1.1rem;
+    color: #DDA0DD; /* Plum */
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+}
+
+.duration-badge {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid #BA55D3;
+    font-size: 0.9rem;
+    color: #FF77FF; /* Bright Pinkish text */
+    font-family: 'Orbitron', sans-serif;
+    white-space: nowrap;
+    box-shadow: inset 0 0 10px rgba(186, 85, 211, 0.2);
+}
+
+.context {
+    font-family: 'Noto Serif JP', serif;
+    line-height: 1.7;
+    color: #F8F8FF; /* GhostWhite */
+    font-size: 1.05rem;
+    text-align: justify;
+}
+
+/* Back Button styling to be Pink with Sci-Fi Shape */
+.back-btn {
+    display: inline-block;
+    padding: 15px 50px;
+    margin-top: 25px;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    background: #FF1493; /* DeepPink base */
+    border: none;
+    clip-path: polygon(
+        20px 0, 
+        100% 0, 
+        100% calc(100% - 20px), 
+        calc(100% - 20px) 100%, 
+        0 100%, 
+        0 20px
+    );
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    box-shadow: none; /* Shadow doesn't work well with clip-path on the element itself, usually needs a wrapper. 
+                         However, for this style, flat or glow text is common. */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.back-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #FF1493, #FF69B4);
+    z-index: -1;
+    transition: transform 0.3s ease;
+}
+
+.back-btn:hover {
+    transform: scale(1.05); /* Slight grow */
+    background: #FF00FF;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+    letter-spacing: 2px;
+}
+
+.back-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 35px rgba(255, 105, 180, 0.8);
+    background: linear-gradient(45deg, #FF00FF, #FF1493);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .experience-container {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .card-header {
+        flex-direction: column;
+    }
+    
+    .duration-badge {
+        align-self: flex-start;
+    }
+}

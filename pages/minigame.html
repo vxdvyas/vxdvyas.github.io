@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechaSamurai: Daytime Fuji</title>
+    <!-- General styles for the loader -->
+    <link rel="stylesheet" href="../loader.css">
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #87CEEB; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        #canvas-container { width: 100vw; height: 100vh; }
+        
+        #ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            pointer-events: none;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(8px);
+            border-left: 4px solid #00d4ff;
+        }
+
+        h1 { margin: 0; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; font-size: 18px; }
+        p { margin: 5px 0 10px 0; opacity: 0.9; font-size: 12px; }
+
+        .camera-controls {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            pointer-events: auto;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: all 0.2s;
+            user-select: none;
+            backdrop-filter: blur(4px);
+        }
+
+        .btn:hover { background: rgba(0, 212, 255, 0.5); border-color: #00d4ff; transform: scale(1.1); }
+        .btn:active { transform: scale(0.9); }
+
+        .controls-hint {
+            font-size: 10px;
+            background: rgba(0,0,0,0.2);
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+   <!-- General Loader structure -->
+   <div id="techno-loader">
+       <div class="loader-content">
+           <div class="circle"></div>
+           <div class="circle"></div>
+           <div class="circle"></div>
+           <div class="loading-text">LOADING</div>
+       </div>
+   </div>
+
+    <div id="ui">
+        <h1>Mecha-S 700</h1>
+        <p>Daytime Patrol: Mount Fuji</p>
+        <div class="controls-hint">
+            WASD / ARROWS: Move & Turn
+        </div>
+    </div>
+
+    <div class="camera-controls">
+        <div class="btn" onclick="adjustZoom(-5)" title="Zoom In">+</div>
+        <div class="btn" onclick="adjustZoom(5)" title="Zoom Out">-</div>
+        <div class="btn" onclick="resetCamera()" title="Reset Camera">⟲</div>
+    </div>
+
+    <div id="canvas-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const COLORS = {
+            skyTop: 0x33aaff,
+            skyBottom: 0xffffff,
+            fujiBase: 0x3d4b59,
+            fujiSnow: 0xffffff,
+            pagodaRed: 0x8a1a1a,
+            pagodaWhite: 0xffffff,
+            pagodaRoof: 0x1a2525,
+            mechaChrome: 0x444444,
+            mechaPrimary: 0x111111,
+            mechaAccent: 0xb22222,
+            mechaGlow: 0x00d4ff,
+            grass: [0x3d5a27, 0x4a6e2f, 0x2d451e, 0x5a7d3a],
+            autumn: [0xbf3131, 0xd97706, 0x8b0000]
+        };
+
+        let scene, camera, renderer, clock;
+        let isMouseDown = false;
+        let targetRotationY = 0.6, targetRotationX = 0.2;
+        let zoom = 45;
+        
+        let samurai, samuraiBody, leftLeg, rightLeg, leftArm, rightArm;
+        const keys = { forward: false, backward: false, left: false, right: false };
+        const moveState = {
+            velocity: 0,
+            rotation: 0,
+            animTime: 0
+        };
+
+        function init() {
+            scene = new THREE.Scene();
+            scene.fog = new THREE.Fog(0xcedbe0, 100, 500);
+
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+            
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.25; // Brighter for daytime
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+            clock = new THREE.Clock();
+
+            addLights();
+            createEnvironment();
+            createMechaSamurai();
+
+            window.addEventListener('resize', onWindowResize);
+            setupInput();
+            animate();
+        }
+
+        function addLights() {
+            // Bright daytime atmosphere
+            const hemiLight = new THREE.HemisphereLight(COLORS.skyTop, 0x4a6e2f, 0.8);
+            scene.add(hemiLight);
+
+            const sunLight = new THREE.DirectionalLight(0xfffdfa, 1.8);
+            sunLight.position.set(-80, 120, 60);
+            sunLight.castShadow = true;
+            sunLight.shadow.mapSize.set(2048, 2048);
+            sunLight.shadow.camera.left = -150;
+            sunLight.shadow.camera.right = 150;
+            sunLight.shadow.camera.top = 150;
+            sunLight.shadow.camera.bottom = -150;
+            scene.add(sunLight);
+        }
+
+        function createEnvironment() {
+            // Skybox Gradient
+            const skyGeo = new THREE.SphereGeometry(480, 32, 32);
+            const skyMat = new THREE.MeshBasicMaterial({ color: COLORS.skyTop, side: THREE.BackSide });
+            scene.add(new THREE.Mesh(skyGeo, skyMat));
+
+            // Ground
+            const ground = new THREE.Mesh(
+                new THREE.PlaneGeometry(1000, 1000), 
+                new THREE.MeshStandardMaterial({ color: 0x1a2e1a, roughness: 1 })
+            );
+            ground.rotation.x = -Math.PI / 2;
+            ground.receiveShadow = true;
+            scene.add(ground);
+
+            // Detailed Grass
+            createGrass(80000);
+
+            // Fuji (Detailed Slope)
+            const fuji = new THREE.Group();
+            const segments = 12, height = 75, radius = 150;
+            for(let i=0; i<segments; i++){
+                const h1 = (i/segments)*height, r1 = radius * Math.pow(1-(h1/height), 0.75);
+                const h2 = ((i+1)/segments)*height, r2 = radius * Math.pow(1-(h2/height), 0.75);
+                const geo = new THREE.CylinderGeometry(r2, r1, height/segments, 64);
+                const isSnow = i > segments * 0.75;
+                const mat = new THREE.MeshStandardMaterial({ 
+                    color: isSnow ? COLORS.fujiSnow : COLORS.fujiBase,
+                    roughness: 1
+                });
+                const ring = new THREE.Mesh(geo, mat);
+                ring.position.y = h1 + (height/segments)/2;
+                ring.receiveShadow = true;
+                fuji.add(ring);
+            }
+            fuji.position.set(-100, -2, -220);
+            scene.add(fuji);
+
+            // Pagoda
+            const pagoda = new THREE.Group();
+            for(let f=0; f<5; f++){
+                const s = 1 - (f*0.12), y = f*5;
+                const walls = new THREE.Mesh(new THREE.BoxGeometry(6*s, 3.5, 6*s), new THREE.MeshStandardMaterial({color: COLORS.pagodaWhite, roughness: 0.5}));
+                walls.position.y = y + 1.75; walls.castShadow = true; pagoda.add(walls);
+                const roof = new THREE.Mesh(new THREE.BoxGeometry(13*s, 0.3, 13*s), new THREE.MeshStandardMaterial({color: COLORS.pagodaRoof, roughness: 0.3}));
+                roof.position.y = y + 3.5; roof.castShadow = true; pagoda.add(roof);
+                const top = new THREE.Mesh(new THREE.ConeGeometry(9.2*s, 2, 4), roof.material);
+                top.rotation.y = Math.PI/4; top.position.y = y + 4.5; pagoda.add(top);
+            }
+            pagoda.position.set(45, 0, 15);
+            scene.add(pagoda);
+
+            // Trees
+            for(let i=0; i<45; i++){
+                const tree = new THREE.Group();
+                const h = 5 + Math.random()*6;
+                const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.4, h), new THREE.MeshStandardMaterial({color: 0x3d2b1f}));
+                trunk.position.y = h/2; tree.add(trunk);
+                const leafMat = new THREE.MeshStandardMaterial({color: COLORS.autumn[Math.floor(Math.random()*3)], roughness: 0.8});
+                for(let j=0; j<12; j++){
+                    const c = new THREE.Mesh(new THREE.SphereGeometry(1.8, 6, 6), leafMat);
+                    c.position.set((Math.random()-0.5)*5, h+(Math.random()-0.5)*4, (Math.random()-0.5)*5);
+                    c.scale.y = 0.6; c.castShadow = true; tree.add(c);
+                }
+                const a = Math.random()*Math.PI*2, d = 35+Math.random()*120;
+                tree.position.set(Math.cos(a)*d, 0, Math.sin(a)*d);
+                scene.add(tree);
+            }
+        }
+
+        function createGrass(count) {
+            const bladeGeo = new THREE.PlaneGeometry(0.12, 0.7, 1, 3);
+            bladeGeo.translate(0, 0.35, 0);
+            const material = new THREE.MeshStandardMaterial({ side: THREE.DoubleSide, roughness: 0.8, alphaTest: 0.5 });
+            const mesh = new THREE.InstancedMesh(bladeGeo, material, count);
+            const dummy = new THREE.Object3D();
+            const color = new THREE.Color();
+
+            for (let i = 0; i < count; i++) {
+                const x = (Math.random() - 0.5) * 400;
+                const z = (Math.random() - 0.5) * 400;
+                
+                // Keep clear space around samurai and pagoda
+                const distToPagoda = Math.sqrt(Math.pow(x-45, 2) + Math.pow(z-15, 2));
+                if (distToPagoda < 12) { i--; continue; }
+
+                dummy.position.set(x, 0, z);
+                dummy.rotation.set((Math.random()-0.5)*0.3, Math.random()*Math.PI, (Math.random()-0.5)*0.3);
+                dummy.scale.setScalar(0.6 + Math.random() * 1.4);
+                dummy.updateMatrix();
+                mesh.setMatrixAt(i, dummy.matrix);
+                color.setHex(COLORS.grass[Math.floor(Math.random()*COLORS.grass.length)]);
+                mesh.setColorAt(i, color);
+            }
+            scene.add(mesh);
+        }
+
+        function createMechaSamurai() {
+            samurai = new THREE.Group();
+            const metalMat = new THREE.MeshStandardMaterial({ color: COLORS.mechaPrimary, metalness: 0.8, roughness: 0.2 });
+            const chromeMat = new THREE.MeshStandardMaterial({ color: COLORS.mechaChrome, metalness: 1, roughness: 0.1 });
+            const accentMat = new THREE.MeshStandardMaterial({ color: COLORS.mechaAccent, metalness: 0.5, roughness: 0.5 });
+            const glowMat = new THREE.MeshStandardMaterial({ color: COLORS.mechaGlow, emissive: COLORS.mechaGlow, emissiveIntensity: 2 });
+
+            samuraiBody = new THREE.Group();
+            const mainChest = new THREE.Mesh(new THREE.BoxGeometry(1.2, 1.4, 0.8), metalMat);
+            samuraiBody.add(mainChest);
+            const core = new THREE.Mesh(new THREE.SphereGeometry(0.2, 16, 16), glowMat);
+            core.position.set(0, 0.1, 0.42);
+            samuraiBody.add(core);
+            samuraiBody.position.y = 2.4;
+            samurai.add(samuraiBody);
+
+            const head = new THREE.Group();
+            head.add(new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.6, 0.6), metalMat));
+            const vis = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.1, 0.1), glowMat);
+            vis.position.set(0, 0.1, 0.31);
+            head.add(vis);
+            head.position.y = 1;
+            samuraiBody.add(head);
+
+            const createLimb = (x, y, isLeg) => {
+                const limb = new THREE.Group();
+                const part1 = new THREE.Mesh(new THREE.BoxGeometry(0.4, 1.2, 0.4), metalMat);
+                part1.position.y = -0.6; limb.add(part1);
+                const joint = new THREE.Mesh(new THREE.SphereGeometry(0.25, 8, 8), chromeMat);
+                joint.position.y = -1.2; limb.add(joint);
+                const part2 = new THREE.Mesh(new THREE.BoxGeometry(0.35, 1.2, 0.35), metalMat);
+                part2.position.y = -1.8; limb.add(part2);
+                if(isLeg) {
+                    const foot = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.3, 0.8), accentMat);
+                    foot.position.y = -2.45; foot.position.z = 0.2; limb.add(foot);
+                }
+                limb.position.set(x, y, 0);
+                return limb;
+            };
+
+            leftLeg = createLimb(-0.4, 1.8, true); samurai.add(leftLeg);
+            rightLeg = createLimb(0.4, 1.8, true); samurai.add(rightLeg);
+            leftArm = createLimb(-0.9, 2.8, false); samurai.add(leftArm);
+            rightArm = createLimb(0.9, 2.8, false); samurai.add(rightArm);
+
+            const blade = new THREE.Mesh(new THREE.BoxGeometry(0.04, 2.4, 0.12), glowMat);
+            blade.position.set(0, -3.2, 0.3); blade.rotation.x = Math.PI/2;
+            rightArm.add(blade);
+
+            samurai.position.set(0, 0, 40);
+            scene.add(samurai);
+        }
+
+        function setupInput() {
+            const handleKey = (e, val) => {
+                const k = e.key.toLowerCase();
+                if (k === 'w' || k === 'arrowup') keys.forward = val;
+                if (k === 's' || k === 'arrowdown') keys.backward = val;
+                if (k === 'a' || k === 'arrowleft') keys.left = val;
+                if (k === 'd' || k === 'arrowright') keys.right = val;
+            };
+            window.addEventListener('keydown', e => handleKey(e, true));
+            window.addEventListener('keyup', e => handleKey(e, false));
+            window.addEventListener('mousedown', () => isMouseDown = true);
+            window.addEventListener('mouseup', () => isMouseDown = false);
+            window.addEventListener('mousemove', (e) => {
+                if(isMouseDown) {
+                    targetRotationY -= e.movementX * 0.005;
+                    targetRotationX -= e.movementY * 0.005;
+                    targetRotationX = Math.max(0.05, Math.min(Math.PI/2.4, targetRotationX));
+                }
+            });
+            window.addEventListener('wheel', e => zoom = Math.max(15, Math.min(150, zoom + e.deltaY * 0.05)));
+        }
+
+        window.adjustZoom = (amt) => zoom = Math.max(15, Math.min(150, zoom + amt));
+        window.resetCamera = () => { targetRotationY = 0.6; targetRotationX = 0.2; zoom = 45; };
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const dt = clock.getDelta();
+
+            const runSpeed = 16.0;
+            const turnSpeed = 4.8;
+            let moving = false;
+
+            if (keys.forward) { moveState.velocity = runSpeed; moving = true; }
+            else if (keys.backward) { moveState.velocity = -runSpeed; moving = true; }
+            else { moveState.velocity *= 0.88; }
+
+            if (keys.left) moveState.rotation += turnSpeed * dt;
+            if (keys.right) moveState.rotation -= turnSpeed * dt;
+
+            if (Math.abs(moveState.velocity) > 0.1 || moving) {
+                samurai.position.x += Math.sin(moveState.rotation) * moveState.velocity * dt;
+                samurai.position.z += Math.cos(moveState.rotation) * moveState.velocity * dt;
+                samurai.rotation.y = moveState.rotation;
+                moveState.animTime += dt * (Math.abs(moveState.velocity) * 0.8);
+            }
+
+            const walk = Math.sin(moveState.animTime);
+            leftLeg.rotation.x = walk * 0.8;
+            rightLeg.rotation.x = -walk * 0.8;
+            leftArm.rotation.x = -walk * 0.5;
+            rightArm.rotation.x = walk * 0.5;
+            samuraiBody.position.y = 2.4 + Math.abs(walk) * 0.18;
+
+            camera.position.x = samurai.position.x + Math.sin(targetRotationY) * Math.cos(targetRotationX) * zoom;
+            camera.position.y = samurai.position.y + Math.sin(targetRotationX) * zoom + 6;
+            camera.position.z = samurai.position.z + Math.cos(targetRotationY) * Math.cos(targetRotationX) * zoom;
+            camera.lookAt(samurai.position.x, 4.5, samurai.position.z);
+
+            renderer.render(scene, camera);
+        }
+
+        window.onload = init;
+    </script>
+    <!-- General script for loader functionality -->
+    <script src="../loader.js"></script>
+</body>
+</html>
