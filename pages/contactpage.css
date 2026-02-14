@@ -125,3 +125,22 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* this adjusts contact cards for mobile */
+@media screen and (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 10px;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+        margin-top: 80px;
+    }
+
+    .contact-card {
+        padding: 20px;
+    }
+}
+

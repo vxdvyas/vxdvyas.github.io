@@ -1,0 +1,219 @@
+/* this controls default text label visibility */
+.btn-text, .side-btn-text {
+    display: none;
+    font-family: 'Orbitron', sans-serif; 
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 0 0 5px #e53935;
+    transition: all 0.3s ease;
+}
+
+/* this adds animation for buttons */
+.side-btn-box, .nav-icon-link {
+    transition: all 0.3s ease-in-out;
+}
+
+/* this controls mobile specific styles */
+@media screen and (max-width: 768px) {
+    
+    /* this adjusts navbar layout for mobile */
+    .navbar {
+        padding: 10px 0 !important;
+        flex-direction: column !important;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.9);
+        border-bottom: 2px solid #e53935;
+        height: auto !important;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 100;
+    }
+
+    .navbar .brand {
+        margin-bottom: 8px;
+        font-size: 1.4rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar ul {
+        margin: 0 !important;
+        padding: 0;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    /* this hides the icon buttons */
+    .nav-icon-btn { display: none !important; }
+
+    /* this displays the text based buttons */
+    .btn-text {
+        display: block;
+        font-size: 0.8rem;
+        padding: 6px 14px !important;
+        border: 1px solid rgba(229, 57, 53, 0.8);
+        border-radius: 4px;
+        background: rgba(20, 0, 0, 0.8);
+        box-shadow: 0 0 5px #e53935; 
+        text-align: center;
+    }
+
+    /* this resets the main hero section properties */
+    .hero-section {
+        display: block !important;
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        margin-top: 0;
+    }
+
+    /* this positions the main character image */
+    .mecha-samurai-container {
+       position: absolute;
+       top: 55%; 
+       left: 50%;
+       transform: translate(-50%, -50%) scale(0.85); 
+       width: 100%;
+       max-width: 500px; 
+       bottom: auto; 
+       z-index: 10;
+       display: flex;
+       justify-content: center;
+       pointer-events: none;
+       opacity: 1;
+       animation: none;
+    }
+
+    .samurai-glow {
+        transform: translateX(-50%);
+        width: 100%;
+    }
+
+    /* this swaps the desktop image for the mobile version */
+    .samurai-img { display: none !important; }
+    .samurai-img-mobile {
+        display: block !important;
+        max-height: 80vh;
+        width: auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* this positions the side navigation buttons */
+    .side-panel {
+        position: absolute;
+        top: 45%; 
+        transform: translateY(-50%);
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px; 
+        z-index: 20;
+        width: auto !important;
+        opacity: 1;
+        animation: none;
+    }
+
+    .left-panel {
+        left: 5px !important; 
+        align-items: flex-start;
+    }
+
+    .right-panel {
+        right: 5px !important; 
+        align-items: flex-end;
+    }
+
+    /* this hides the side button images */
+    .side-btn-img { display: none !important; }
+
+    /* this styles the container for text buttons */
+    .side-btn-box {
+        width: auto !important;
+        height: auto !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        display: block;
+        margin: 0;
+    }
+
+    /* this styles the text inside side buttons */
+    .side-btn-text {
+        display: block;
+        font-size: 0.7rem; 
+        background: linear-gradient(90deg, rgba(0,0,0,0.85), rgba(70,0,0,0.85));
+        padding: 8px 10px !important; 
+        border: 1px solid #e53935;
+        border-radius: 6px;
+        box-shadow: 0 0 8px rgba(229, 57, 53, 0.5);
+        min-width: 80px;
+        text-align: center;
+        backdrop-filter: blur(4px);
+    }
+
+    /* this positions and styles the start game button */
+    .start-game-btn {
+        position: absolute;
+        bottom: 80px; 
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 350px;
+        background: var(--primary-bg, #9b0000); 
+        background: linear-gradient(45deg, #cc0000, #8a0000);
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1rem; 
+        padding: 12px 0;
+        text-align: center;
+        border: 2px solid white;
+        z-index: 50;
+        display: block;
+        
+        clip-path: polygon(
+            15px 0, 100% 0, 
+            100% calc(100% - 15px), calc(100% - 15px) 100%, 
+            0 100%, 0 15px
+        );
+        box-shadow: 0 0 15px #ff0000;
+        text-shadow: 0 0 5px black;
+        letter-spacing: 2px;
+        text-decoration: none;
+    }
+
+    .start-game-btn:active {
+        transform: translateX(-50%) scale(0.95);
+    }
+
+    /* this manages the chat bubble visibility */
+    .chat-cloud-container {
+        display: none !important;
+    }
+    
+    .chat-cloud-text { font-size: 0.65rem; }
+    
+    /* this controls page scrolling */
+    html, body {
+        height: auto !important;
+        overflow-y: auto !important;
+    }
+    
+    /* this controls the footer visibility and position */
+    footer {
+        display: block !important;
+        position: relative;
+        bottom: auto;
+        left: 0;
+        width: 100%;
+        background: rgba(0,0,0,0.8);
+        z-index: 60;
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+}

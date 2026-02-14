@@ -225,3 +225,28 @@ body {
         align-self: flex-start;
     }
 }
+
+/* this controls phone layout settings */
+@media screen and (max-width: 768px) {
+    /* this enables scrolling */
+    body {
+        overflow-y: auto !important;
+        height: auto !important;
+        justify-content: flex-start;
+        padding-top: 20px;
+    }
+
+    /* this stacks timeline or card items */
+    .experience-container, .timeline {
+        flex-direction: column;
+        width: 100%;
+        padding: 10px;
+    }
+
+    /* this adjusts individual card size */
+    .experience-card, .job-card {
+        width: 100% !important;
+        margin-bottom: 20px;
+    }
+}
+

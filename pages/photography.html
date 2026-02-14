@@ -44,6 +44,19 @@
             font-family: 'Cinzel', serif;
             margin-bottom: 40px;
         }
+
+        /* this makes photography gallery responsive */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>

@@ -65,6 +65,39 @@
             border-radius: 4px;
             display: inline-block;
         }
+
+        #joystick-container {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            touch-action: none;
+            display: none;
+            backdrop-filter: blur(4px);
+            z-index: 100;
+        }
+        
+        #joystick-knob {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 212, 255, 0.8);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+            pointer-events: none;
+        }
+
+        @media (max-width: 1024px) {
+            #joystick-container { display: block; }
+            .controls-hint { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -90,6 +123,10 @@
         <div class="btn" onclick="adjustZoom(-5)" title="Zoom In">+</div>
         <div class="btn" onclick="adjustZoom(5)" title="Zoom Out">-</div>
         <div class="btn" onclick="resetCamera()" title="Reset Camera">⟲</div>
+    </div>
+
+    <div id="joystick-container">
+        <div id="joystick-knob"></div>
     </div>
 
     <div id="canvas-container"></div>
@@ -149,6 +186,7 @@
 
             window.addEventListener('resize', onWindowResize);
             setupInput();
+            setupJoystick();
             animate();
         }
 
@@ -384,6 +422,45 @@
             camera.lookAt(samurai.position.x, 4.5, samurai.position.z);
 
             renderer.render(scene, camera);
+        }
+
+        function setupJoystick() {
+            const container = document.getElementById('joystick-container');
+            const knob = document.getElementById('joystick-knob');
+            const maxDist = 35;
+            
+            const handleTouch = (e) => {
+                 e.preventDefault();
+                 const touch = e.touches[0];
+                 const rect = container.getBoundingClientRect();
+                 const centerX = rect.left + rect.width / 2;
+                 const centerY = rect.top + rect.height / 2;
+                 
+                 let dx = touch.clientX - centerX;
+                 let dy = touch.clientY - centerY;
+                 const dist = Math.sqrt(dx*dx + dy*dy);
+                 
+                 if (dist > maxDist) {
+                     dx = (dx / dist) * maxDist;
+                     dy = (dy / dist) * maxDist;
+                 }
+                 
+                 knob.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+                 
+                 keys.forward = dy < -10;
+                 keys.backward = dy > 10;
+                 keys.left = dx < -10;
+                 keys.right = dx > 10;
+            };
+
+            container.addEventListener('touchstart', handleTouch, {passive: false});
+            container.addEventListener('touchmove', handleTouch, {passive: false});
+            
+            container.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                knob.style.transform = `translate(-50%, -50%)`;
+                keys.forward = keys.backward = keys.left = keys.right = false;
+            });
         }
 
         window.onload = init;

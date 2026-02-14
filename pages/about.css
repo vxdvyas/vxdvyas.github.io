@@ -32,7 +32,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Prevent scrolling if not needed */
+    /* overflow: hidden;  Removed to allow scrolling if content overflows */
+    overflow-x: hidden;
 }
 
 /* 
@@ -258,3 +259,52 @@ body {
         font-size: 1rem;
     }
 }
+
+/* this controls mobile view settings */
+@media screen and (max-width: 768px) {
+    /* this allows vertical scrolling on phone */
+    body {
+        height: auto;
+        overflow-y: auto;
+        display: block; /* removes flex centering to allow scroll flow */
+        padding-bottom: 20px;
+    }
+
+    /* this fixes the card size and stacking */
+    .about-card {
+        flex-direction: column !important;
+        height: auto !important;
+        width: 90% !important;
+        margin-top: 80px; /* clears space for loading or headers */
+    }
+
+    /* this makes the image sit on top or bottom */
+    .content-right {
+        order: -1; /* move image to top */
+        width: 100%;
+        height: 250px; /* limit height */
+    }
+    
+    .profile-img {
+        width: 150px;
+        height: 150px;
+        margin-top: 20px;
+    }
+
+    /* this adjusts text content spacing */
+    .content-left {
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* this repositions the back button */
+    .back-btn {
+        top: 20px;
+        bottom: auto;
+        left: 20px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+

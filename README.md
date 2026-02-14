@@ -1,7 +1,16 @@
 
-# Portfolio Website v1 - MechaSamurai Edition
+# Portfolio Website v1.0.1 - MechaSamurai Edition
 
-Welcome to the first version of my personal portfolio website, featuring a unique "MechaSamurai" theme. This project showcases my skills, experience, and projects in an interactive and visually engaging way.
+Welcome to the latest version of my personal portfolio website, featuring a unique "MechaSamurai" theme. This project showcases my skills, experience, and projects in an interactive and visually engaging way.
+
+## New in v1.0.1: Mobile Experience
+This update brings comprehensive mobile responsiveness to the entire portfolio, ensuring a seamless experience across all devices.
+
+### Mobile Responsive Features
+- **Homepage HUD Interface**: The desktop experience transforms into a sleek, mobile-optimized command center. Navigation buttons (Projects, Contact, Resume) are moved to the top, while section shortcuts flanking the MechaSamurai convert to compact text buttons for touch-friendly navigation.
+- **Optimized Layouts**: All pages (About, Education, Experience, Skills, Certifications) now feature vertical stacking, touch-optimized spacing, and improved readability on smaller screens.
+- **Virtual Joystick**: The  minigame now detects mobile devices and automatically enables an on-screen virtual joystick for movement control, replacing keyboard inputs.
+- **Smart Footer**: The footer is now position-aware on mobile, appearing naturally at the bottom of the scrollable content.
 
 ## About the Project
 This portfolio is designed to be a digital representation of my professional journey. The "MechaSamurai" theme combines traditional Japanese aesthetics with futuristic sci-fi elements, symbolizing the blend of foundational knowledge and cutting-edge technology.

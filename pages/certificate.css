@@ -167,3 +167,26 @@ body {
     box-shadow: 0 0 20px #ffd700;
     transform: scale(1.05); /* Slight grow */
 }
+
+/* this handles mobile grid layout */
+@media screen and (max-width: 768px) {
+    /* this allows vertical flow */
+    body {
+        height: auto;
+        overflow-y: auto;
+    }
+
+    /* this converts grid to single column */
+    .certificate-grid, .cert-container {
+        grid-template-columns: 1fr !important;
+        width: 100%;
+        padding: 10px;
+    }
+
+    /* this ensures cards fit screen */
+    .certificate-card {
+        width: 100%;
+        margin: 0 auto 20px auto;
+    }
+}
+

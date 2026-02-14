@@ -282,3 +282,29 @@ body {
     to {transform:translateY(-50%) scale(1)}
 }
 
+
+/* this adapts the project slider page */
+@media screen and (max-width: 768px) {
+    body {
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .cards-wrapper {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding-bottom: 30px;
+    }
+
+    .project-card {
+        width: 90% !important;
+        margin-bottom: 30px;
+    }
+
+    /* this fits the slider image */
+    .card-image-slider {
+        height: 180px; 
+    }
+}
+
