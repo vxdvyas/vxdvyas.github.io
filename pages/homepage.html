@@ -68,6 +68,12 @@
                 <span class="side-btn-text">EXPERIENCE</span>
                 <img src="../assets/experiencebtn.png" alt="Experience Button" class="side-btn-img">
             </a>
+            
+            <!-- Background Selection -->
+            <div class="side-btn-box" onclick="openModal('bgModal')">
+                <span class="side-btn-text">BACKGROUND</span>
+                <img src="../assets/changebackgroundbtn.png" alt="Change Background" class="side-btn-img">
+            </div>
         </div>
 
         <!-- Vertical Buttons Right -->
@@ -84,6 +90,12 @@
                 <span class="side-btn-text">BLOG</span>
                 <img src="../assets/blogbtn.png" alt="Blog Button" class="side-btn-img">
             </a>
+
+            <!-- Character Selection -->
+            <div class="side-btn-box" onclick="openModal('charModal')">
+                <span class="side-btn-text">CHARACTER</span>
+                <img src="../assets/changecharacterbtn.png" alt="Change Character" class="side-btn-img">
+            </div>
         </div>
 
         <div class="mecha-samurai-container">
@@ -150,5 +162,41 @@
     <!-- General script for loader functionality -->
     <script src="../loader.js"></script>
 <!-- <img src="../assets/homepagebackground.png" alt="Background" class="bg-image"/>    -->
+    <!-- Selection Modals -->
+    <div id="bgModal" class="bg-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('bgModal')">&times;</span>
+            <h2>SELECT BACKGROUND</h2>
+            <div class="modal-grid">
+                <img src="../assets/background1.png" onclick="changeBackground('background1.png')" class="preview-img" alt="BG1">
+                <img src="../assets/background2.png" onclick="changeBackground('background2.png')" class="preview-img" alt="BG2">
+                <img src="../assets/background3.png" onclick="changeBackground('background3.png')" class="preview-img" alt="BG3">
+                <img src="../assets/background4.png" onclick="changeBackground('background4.png')" class="preview-img" alt="BG4">
+                <img src="../assets/background5.png" onclick="changeBackground('background5.png')" class="preview-img" alt="BG5">
+                <img src="../assets/background6.png" onclick="changeBackground('background6.png')" class="preview-img" alt="BG6">
+            </div>
+        </div>
+    </div>
+
+    <div id="charModal" class="bg-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('charModal')">&times;</span>
+            <h2>SELECT CHARACTER</h2>
+            <div class="modal-grid char-grid">
+                <div onclick="changeCharacter('mechasamurai')" class="char-option">
+                    <img src="../assets/mechasamurai.png" class="preview-img char-preview" alt="Samurai">
+                    <p>Mecha Samurai</p>
+                </div>
+                <div onclick="changeCharacter('mechadokeshi')" class="char-option">
+                    <img src="../assets/mechadokeshi.png" class="preview-img char-preview" alt="Dokeshi">
+                    <p>Mecha Dokeshi</p>
+                </div>
+                <div onclick="changeCharacter('cryomecha')" class="char-option">
+                    <img src="../assets/cryomecha.png" class="preview-img char-preview" alt="Cryo">
+                    <p>Cryo Mecha</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
